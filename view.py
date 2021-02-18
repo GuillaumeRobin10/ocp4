@@ -19,7 +19,7 @@ DISPLAY_ROUND = "| Ronde |"
 def make_a_hyphens(name_menu):
     """Give it a sting and return a string of hyphens egal of the giving string."""
     hyphens = ""
-    for i in range(len(name_menu)):
+    for _ in range(len(name_menu)):
         hyphens += "-"
     return hyphens
 
