@@ -31,11 +31,11 @@ def display_head_menu(name):
 def control_and_display_a_choice(text_to_display,case,header=""):
     """control the user input and display the choice 'til he don't make a good choice"""
     user_input = ""
+    os.system('cls||clear')
     while not user_input in case:
         if not header == "":
             display_head_menu(header)
-        print(text_to_display)
-        user_input = input()
+        user_input = input(text_to_display)
         os.system('cls||clear')
     return user_input
 
@@ -56,94 +56,79 @@ def display_main_menu():
 def display_and_control_make_a_tournament():
     tournament ={}
     display_head_menu(MAKE_TOURNAMENT)
-    print("Nom :")
-    user_choise = input()
-    tournament["Nom"] = user_choise
-    os.system('cls||clear')
-    display_head_menu(MAKE_TOURNAMENT)
-    print(f"Nom : {tournament['Nom']}")
-    print("Lieu :")
-    user_choise = input()
-    tournament["Lieu"] = user_choise
-    os.system('cls||clear')
-    display_head_menu(MAKE_TOURNAMENT)
-    print(f"Nom : {tournament['Nom']}")
-    print(f"Lieu : {tournament['Lieu']}")
+    user_choice = input(" Nom :")
+    tournament["Nom"] = user_choice
+    user_choice = input(" Lieu :")
+    tournament["Lieu"] = user_choice
     #mettre la date
-    user_choise = ""
-    while not ( user_choise in ["1","2"]):
-        os.system('cls||clear')
-        display_head_menu(MAKE_TOURNAMENT)
-        print(f"Nom : {tournament['Nom']}")
-        print(f"Lieu : {tournament['Lieu']}")
-        user_choise = input("Tounois sur plusieurs jours ? oui(1) non(2)")
-
-    if user_choise == "1":
-        os.system('cls||clear')
-        display_head_menu(MAKE_TOURNAMENT)
-        print(f"Nom : {tournament['Nom']}")
-        print(f"Lieu : {tournament['Lieu']}")
-        print("Tounois sur plusieurs jours")
-        # mettre la date
-        user_choise = input("Date du début")
-        tournament["Debut"] = user_choise
-        user_choise = input("Date de fin")
-        tournament["Fin"] = user_choise
+    date_statement = f" Nom : {tournament['Nom']} \n Lieu : {tournament['Lieu']} \n"
+    date_choice = date_statement + " Tounois sur plusieurs jours ? oui(1) non(2)"
+    cases=["1","2"]
+    user_choice=control_and_display_a_choice(date_choice,cases,MAKE_TOURNAMENT)
+    if user_choice == "1":
+        date_ok=False
+        while not date_ok == True:
+            os.system('cls||clear')
+            display_head_menu(MAKE_TOURNAMENT)
+            print(date_statement+" Tounois sur plusieurs jours")
+            user_choice = input(" Date du début du tournois : ( format JJ/MM/AAAA ) ")
+            date_ok = control_a_date(user_choice)
+        tournament["Debut"] = user_choice
+        date_ok = False
+        after = False
+        while not (date_ok == True and after== True):
+            os.system('cls||clear')
+            display_head_menu(MAKE_TOURNAMENT)
+            print(date_statement+f" Tounois sur plusieurs jours \n Début du tournois : {tournament['Debut']} ")
+            user_choice = input(" Date de fin du tournois : ( format JJ/MM/AAAA ) ")
+            date_ok = control_a_date(user_choice)
+            if date_ok :
+                after = control_a_date_after(tournament['Debut'],user_choice)
+        tournament["Fin"] = user_choice
     else :
-        user_choise = ""
-        os.system('cls||clear')
-        display_head_menu(MAKE_TOURNAMENT)
-        print(f"Nom : {tournament['Nom']}")
-        print(f"Lieu : {tournament['Lieu']}")
-        user_choise = input("quelle est la date du tournois ?")
-        tournament["Debut"]= user_choise
-        tournament["Fin"] = user_choise
-    print("Type : Bullet (1) , Blitz (2) , Coup Rapide (3)")#controler le type
-    user_choise = ""
-    while not ( user_choise in ["1","2","3"]):
-        user_choise = input()
-    if user_choise == "1":
+        date_ok = False
+        while not date_ok :
+            os.system('cls||clear')
+            display_head_menu(MAKE_TOURNAMENT)
+            print(date_statement + " Tounois sur une journée")
+            user_choice = input(" Date du tournois : ( format JJ/MM/AAAA ) ")
+            date_ok = control_a_date(user_choice)
+        tournament["Debut"] = user_choice
+        tournament["Fin"] = user_choice
+    type_statement = f" Nom : {tournament['Nom']} \n Lieu : {tournament['Lieu']} \n Début :{tournament['Debut']} \n Fin :{tournament['Fin']} \n"
+    type_statement += " Type : Bullet (1) , Blitz (2) , Coup Rapide (3)"
+    cases=["1","2","3"]
+    user_choice = control_and_display_a_choice(type_statement, cases, MAKE_TOURNAMENT)
+    if user_choice == "1":
         tournament["Type"] = "Bullet"
-    elif user_choise == "2":
+    elif user_choice == "2":
         tournament["Type"] = "Blitz"
-    elif user_choise == "3":
+    elif user_choice == "3":
         tournament["Type"] = "Coup Rapide"
     os.system('cls||clear')
     display_head_menu(MAKE_TOURNAMENT)
-    print(f"Nom : {tournament['Nom']}")
-    print(f"Lieu : {tournament['Lieu']}")
-    print(f"Début : {tournament['Debut']}")
-    print(f"Fin : {tournament['Fin']}")
-    print(f"Type : {tournament['Type']}")
-    print("Nombre de round : (passer pour un nombre de round par défault a 4)") #défault=4
-    user_choise = input()
+    print(f" Nom : {tournament['Nom']}")
+    print(f" Lieu : {tournament['Lieu']}")
+    print(f" Début : {tournament['Debut']}")
+    print(f" Fin : {tournament['Fin']}")
+    print(f" Type : {tournament['Type']}")
+    user_choice = input(" Nombre de ronde : ( entre 1 et 8, par défault il y a 4 ronde)")
     try:
-        nb_round =int(user_choise)
-        tournament["Round"] = nb_round
-    except:
+        nb_round =int(user_choice)
+        if 0 < nb_round < 8:
+            tournament["Round"] = nb_round
+        else:
+            tournament["Round"] = 4
+    except ValueError:
         tournament["Round"] = 4
     os.system('cls||clear')
     display_head_menu(MAKE_TOURNAMENT)
-    print(f"Nom : {tournament['Nom']}")
-    print(f"Lieu : {tournament['Lieu']}")
-    print(f"Début : {tournament['Debut']}")
-    print(f"Fin : {tournament['Fin']}")
-    print(f"Type : {tournament['Type']}")
-    print(f"Nombre de round : {tournament['Round']}")
-    print("Description :")
-    user_choise = input()
-    tournament["Description"] = user_choise
-    while not user_choise =="1":
-        os.system('cls||clear')
-        display_head_menu(MAKE_TOURNAMENT)
-        print(f"Nom : {tournament['Nom']}")
-        print(f"Lieu : {tournament['Lieu']}")
-        print(f"Début : {tournament['Debut']}")
-        print(f"Fin : {tournament['Fin']}")
-        print(f"Type : {tournament['Type']}")
-        print(f"Nombre de round : {tournament['Round']}")
-        print(f"Description : {tournament['Description']}")
-        user_choise = input ("Continuer (1)\n")
+    end_display = f" Nom : {tournament['Nom']} \n Lieu : {tournament['Lieu']} \n Début : {tournament['Debut']} \n Fin : {tournament['Fin']} \n Type : {tournament['Type']} \n Nombre de round : {tournament['Round']}"
+    user_choice = input(f"{end_display} \n Description :")
+    tournament["Description"] = user_choice
+    end_display += f"\n Description : {tournament['Description']} \n continuer (1)"
+    control_and_display_a_choice(end_display,["1"],MAKE_TOURNAMENT)
+
     return make_a_tournament(tournament)
 
 
@@ -176,3 +161,4 @@ def main():
     control_and_display_main_choise()
 
 if __name__ == "__main__":
+    display_and_control_make_a_tournament()
