@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import view.main
+from view.main import main_view
 
-view.main.main()
+main_view()
 
 
 
