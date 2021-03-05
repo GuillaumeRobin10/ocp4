@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 class Player:
-    def __init__(self, lastname, firstname, date_of_birth, gender, ranking, identity, tournament_id, tournament_point):
+    def __init__(self, lastname="", firstname="", date_of_birth="", gender="", ranking="", identity="", tournament_id="", tournament_point=""):
         self.identity = identity
         self.lastname = lastname
         self.firstname = firstname

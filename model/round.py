@@ -7,9 +7,6 @@ class Round:
         self.players_id = players_id
         self.tournament_id = tournament_id
 
-    def other_matchmaking(self):
-        pass
-
     def first_matchmaking(self):
         safety_list = self.players_id
         first_list = []
