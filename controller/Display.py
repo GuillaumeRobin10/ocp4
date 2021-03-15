@@ -5,68 +5,45 @@ import datetime
 
 
 def control_int():
-    itsok = False
+    its_ok = False
     os.system("stty -echo")
-    while not itsok:
+    while not its_ok:
         user = input()
         try:
             int(user)
-            itsok = True
+            its_ok = True
             return int(user)
         except ValueError:
             pass
 
 
-def control_input(cases):
-    choice_ok = False
-    user_choice = input()
-    if user_choice in cases:
-        choice_ok = True
-        return choice_ok, user_choice
-    return choice_ok
-
-
-def control_choice(string, cases):
-    print(string)
+def control_choice(cases):
     os.system("stty -echo")
     user = input()
     while user not in cases:
         user = input()
-    os.system("stty echo")
     return user
 
 
-def type_str():
-    types = display("Choisir un Type: Bullet (1) , Blitz (2) , Coup Rapide (3)", "choice", ["1", "2", "3"])
-    if types == "1":
-        return "Bullet"
-    elif types == "2":
-        return "Blitz"
-    else:
-        return "Coup Rapide"
-
-
-def control_date(string1, string2=""):
-    itsok = False
-    print(string1, end="")
+def control_date(date1=""):
     os.system("stty -echo")
-    user = ""
-    while not itsok:
-        user = input()
-        itsok = control_a_date(user)
-        if not string2 =="" and itsok:
-            itsok = control_a_date_after(string2, user)
-    os.system("stty echo")
-    print(user)
-    return user
+    is_ok = False
+    user_choice = ""
+    while not is_ok:
+        user_choice = input()
+        is_ok = control_a_date(user_choice)
+        if not date1 == "" and is_ok:
+            is_ok = control_a_date_after(date1, user_choice)
+    return user_choice
 
 
 def control_a_date(string):
-    list = string.split("/")
+    """return true if the string is a date and false if not"""
+    date_list = string.split("/")
     try:
-        year = int(list[2])
-        month = int(list[1])
-        day = int(list[0])
+        year = int(date_list[2])
+        month = int(date_list[1])
+        day = int(date_list[0])
         datetime.date(year, month, day)
         return True
     except ValueError:
@@ -75,7 +52,8 @@ def control_a_date(string):
         return False
 
 
-def control_a_date_after(date1,date2):
+def control_a_date_after(date1, date2):
+    """ return true if date2 > date 1, false if not"""
     date1list = date1.split("/")
     year1 = int(date1list[2])
     month1 = int(date1list[1])
@@ -88,7 +66,7 @@ def control_a_date_after(date1,date2):
     d2 = datetime.date(year2, month2, day2)
     if d1 <= d2:
         return True
-    else :
+    else:
         return False
 
 
@@ -102,13 +80,13 @@ def control_natural():
 def control_gender():
     gender = ""
     os.system("stty -echo")
-    while not (gender =="homme" or gender == "femme"):
+    while not (gender == "homme" or gender == "femme"):
         gender = input().lower()
     return gender
 
 
-def display(string, type_to_check="str", cases=(), string2=""):
-    """fonction input qui se contrôle automatiquement"""
+def display(string, type_to_check="str", cases=(), date1=""):
+    """control if an input is what is suppose to """
     if type_to_check == "int":
         print(string, end="")
         integer = control_int()
@@ -122,9 +100,16 @@ def display(string, type_to_check="str", cases=(), string2=""):
         print(natural)
         return natural
     elif type_to_check == "date":
-        return control_date(string, string2)
+        print(string, end="")
+        date = control_date(date1)
+        os.system("stty echo")
+        print(date)
+        return date
     elif type_to_check == "choice":
-        return control_choice(string, cases)
+        print(string, end="")
+        user_choice = control_choice(cases)
+        os.system("stty echo")
+        return user_choice
     elif type_to_check == "str":
         return input(string)
     elif type_to_check == "gender":
@@ -133,6 +118,17 @@ def display(string, type_to_check="str", cases=(), string2=""):
         os.system("stty echo")
         print(gender)
         return gender
+
+
+def type_str():
+    """convert a string number to a string"""
+    types = display("Choisir un Type: Bullet (1) , Blitz (2) , Coup Rapide (3)", "choice", ["1", "2", "3"])
+    if types == "1":
+        return "Bullet"
+    elif types == "2":
+        return "Blitz"
+    else:
+        return "Coup Rapide"
 
 
 if __name__ == "__main__":
