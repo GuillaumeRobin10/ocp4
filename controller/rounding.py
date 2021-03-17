@@ -1,55 +1,66 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from model.tournament import Tournament
-from model.round import Round
-from model.player import Player
 
-def sort(players, tid):
-    sorted_player = sorted(players, key=lambda player: player.ranking, reverse=True)
-    sorted_player = sorted(sorted_player, key=lambda player: player.tournament_point[tid], reverse=True)
+from model.round import Round
+
+from controller.setting import current_tournament, players, result_list
+from controller.matchmaking import other_matchmaking
+
+
+def pairing():
+    if not current_tournament.rounds:
+        round_building(True)
+    else:
+        round_building(False)
+
+
+def sort_players():
+    sorted_player = sorted(players,
+                           key=lambda player: player.ranking,
+                           reverse=True)
+    sorted_player = sorted(sorted_player,
+                           key=lambda player: player.tournament_point[current_tournament.identity],
+                           reverse=True)
     return sorted_player
 
-def make_a_round(players,current_tournament):
-    sorted_players = sort(players, current_tournament.identity)
-    players_id = []
-    for player in sorted_players:
-        players_id.append(player.identity)
-    return Round(players_id, current_tournament.identity)
+
+def get_players_id(sorted_player_list):
+    sorted_id_list = []
+    for player in sorted_player_list:
+        sorted_id_list.append(player.identity)
+    return sorted_id_list
 
 
-def first_round(players, current_tournament):
-    current_round = make_a_round(players, current_tournament)
-    current_round.first_matchmaking()
+def round_building(first):
+    sorted_players = get_players_id(sort_players())
+    current_round = Round(sorted_players, current_tournament.identity)
+    if first:
+        current_round.first_matchmaking()
+    else:
+        current_round.edit_matches(other_matchmaking(sorted_players))
     current_tournament.add_a_round(current_round)
-    return current_tournament
 
 
-def other_round(players, current_tournament):
-    list_of_match = []
-    current_round = make_a_round(players, current_tournament)
-    safety_list = current_round.players_id
-    for rounded in current_tournament.rounds:
-        for match in rounded.matches:
-            list_of_match.append(match)
-    while len(current_round.matches) < 4:
-        i = 1
-        while (safety_list[0], safety_list[i]) in list_of_match:
-            i += 1
-            if i == len(safety_list):
-                i = 1
-                break
-        match = (safety_list.pop(0), safety_list.pop(i-1))
-        current_round.matches.append(match)
-    current_tournament.add_a_round(current_round)
-    return current_tournament
+def scoring():
+    i = 0
+    for result in result_list:
+        if result == "v":
+            for player in players:
+                if player.identity == current_tournament.rounds[-1].matches[i][0]:
+                    player.add_tournament_point(current_tournament.identity, 1)
+        elif result == "n":
+            for player in players:
+                if player.identity == current_tournament.rounds[-1].matches[i][0]:
+                    player.add_tournament_point(current_tournament.identity, 0.5)
+                elif player.identity == current_tournament.rounds[-1].matches[i][1]:
+                    player.add_tournament_point(current_tournament.identity, 0.5)
+        elif result == "d":
+            for player in players:
+                if player.identity == current_tournament.rounds[-1].matches[i][1]:
+                    player.add_tournament_point(current_tournament.identity, 1)
+        i += 1
+    result_list.clear()
 
-def test_point(players,tournament):
-    for match in tournament.rounds[-1].matches:
-        whowin = input(f"{players[match[0]].firstname} vs {players[match[1]].firstname}")
-        if whowin == "v":
-            players[match[0]].add_tournament_point(tournament.identity, 1)
-        elif whowin == "n":
-            players[match[0]].add_tournament_point(tournament.identity, 0.5)
-            players[match[1]].add_tournament_point(tournament.identity, 0.5)
-        else:
-            players[match[1]].add_tournament_point(tournament.identity, 1)
+
+if __name__ == "__main__":
+    print("can't be run ")
