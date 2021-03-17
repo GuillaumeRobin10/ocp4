@@ -101,10 +101,10 @@ def display(string, type_to_check="str", cases=(), date1=""):
         return natural
     elif type_to_check == "date":
         print(string, end="")
-        date = control_date(date1)
+        dating = control_date(date1)
         system("stty echo")
-        print(date)
-        return date
+        print(dating)
+        return dating
     elif type_to_check == "choice":
         print(string, end="")
         user_choice = control_choice(cases)
