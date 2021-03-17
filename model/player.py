@@ -2,14 +2,19 @@
 # -*- coding: utf-8 -*-
 
 class Player:
-    def __init__(self, lastname="", firstname="", date_of_birth="", gender="", ranking="", identity="", tournament_id="", tournament_point=""):
+    def __init__(self, lastname="", firstname="", date_of_birth="", gender="", ranking=0, identity="",
+                 tournament_point=None):
         self.identity = identity
         self.lastname = lastname
         self.firstname = firstname
         self.date_of_birth = date_of_birth
         self.gender = gender
         self.ranking = ranking
-        self.tournament_point = {tournament_id: tournament_point}
+        self.tournament_point = tournament_point
+        self.serialized_player = {}
+
+    def edit_identity(self, identity):
+        self.identity = identity
 
     def edit_lastname(self, lastname):
         self.lastname = lastname
@@ -38,8 +43,18 @@ class Player:
         else:
             print("modification impossible, le classement ne peut pas être inférieur a 0")
 
-    def add_tournament_point(self, id, added):
-        self.tournament_point[id] += added
+    def add_tournament_point(self, identity, added):
+        self.tournament_point[identity] += added
+
+    def serialization(self):
+        self.serialized_player = {"lastname": self.lastname,
+                                  "firstname": self.firstname,
+                                  "date_of_birth": self.date_of_birth,
+                                  "gender": self.gender,
+                                  "ranking": self.ranking,
+                                  "identity": self.identity,
+                                  "tournament_point": self.tournament_point}
+
 
 if __name__ == "__main__":
     print("can't be run")
