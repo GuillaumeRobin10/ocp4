@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
-import datetime
+from os import system
+from datetime import date
 
 
 def control_int():
     its_ok = False
-    os.system("stty -echo")
+    system("stty -echo")
     while not its_ok:
         user = input()
         try:
@@ -18,23 +18,11 @@ def control_int():
 
 
 def control_choice(cases):
-    os.system("stty -echo")
-    user = input()
+    system("stty -echo")
+    user = input().lower()
     while user not in cases:
         user = input()
     return user
-
-
-def control_date(date1=""):
-    os.system("stty -echo")
-    is_ok = False
-    user_choice = ""
-    while not is_ok:
-        user_choice = input()
-        is_ok = control_a_date(user_choice)
-        if not date1 == "" and is_ok:
-            is_ok = control_a_date_after(date1, user_choice)
-    return user_choice
 
 
 def control_a_date(string):
@@ -44,7 +32,7 @@ def control_a_date(string):
         year = int(date_list[2])
         month = int(date_list[1])
         day = int(date_list[0])
-        datetime.date(year, month, day)
+        date(year, month, day)
         return True
     except ValueError:
         return False
@@ -58,16 +46,28 @@ def control_a_date_after(date1, date2):
     year1 = int(date1list[2])
     month1 = int(date1list[1])
     day1 = int(date1list[0])
-    d1 = datetime.date(year1, month1, day1)
+    d1 = date(year1, month1, day1)
     date2list = date2.split("/")
     year2 = int(date2list[2])
     month2 = int(date2list[1])
     day2 = int(date2list[0])
-    d2 = datetime.date(year2, month2, day2)
+    d2 = date(year2, month2, day2)
     if d1 <= d2:
         return True
     else:
         return False
+
+
+def control_date(date1=""):
+    system("stty -echo")
+    is_ok = False
+    user_choice = ""
+    while not is_ok:
+        user_choice = input()
+        is_ok = control_a_date(user_choice)
+        if not date1 == "" and is_ok:
+            is_ok = control_a_date_after(date1, user_choice)
+    return user_choice
 
 
 def control_natural():
@@ -79,7 +79,7 @@ def control_natural():
 
 def control_gender():
     gender = ""
-    os.system("stty -echo")
+    system("stty -echo")
     while not (gender == "homme" or gender == "femme"):
         gender = input().lower()
     return gender
@@ -90,32 +90,32 @@ def display(string, type_to_check="str", cases=(), date1=""):
     if type_to_check == "int":
         print(string, end="")
         integer = control_int()
-        os.system("stty echo")
+        system("stty echo")
         print(integer)
         return integer
     elif type_to_check == "natural":
         print(string, end="")
         natural = control_natural()
-        os.system("stty echo")
+        system("stty echo")
         print(natural)
         return natural
     elif type_to_check == "date":
         print(string, end="")
         date = control_date(date1)
-        os.system("stty echo")
+        system("stty echo")
         print(date)
         return date
     elif type_to_check == "choice":
         print(string, end="")
         user_choice = control_choice(cases)
-        os.system("stty echo")
+        system("stty echo")
         return user_choice
     elif type_to_check == "str":
         return input(string)
     elif type_to_check == "gender":
         print(string, end="")
         gender = control_gender()
-        os.system("stty echo")
+        system("stty echo")
         print(gender)
         return gender
 
