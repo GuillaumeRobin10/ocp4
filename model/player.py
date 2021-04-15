@@ -10,6 +10,7 @@ class Player:
         self.gender = gender
         self.ranking = ranking
         self.tournament_point = {}
+        self.serialized = {}
 
     def edit_identity(self, identity):
         self.identity = identity
@@ -39,7 +40,7 @@ class Player:
         if (self.ranking - ranking_removed) >= 0:
             self.ranking -= ranking_removed
         else:
-            print("modification impossible, le classement ne peut pas être inférieur a 0")
+            pass
 
     def add_tournament_point(self, tournament_identity, point_to_add):
         try:
@@ -47,16 +48,14 @@ class Player:
         except KeyError:
             self.tournament_point = {tournament_identity: point_to_add}
 
-    @property
-    def serialized_player(self):
-        serialized = {"lastname": self.lastname,
-                      "firstname": self.firstname,
-                      "date_of_birth": self.date_of_birth,
-                      "gender": self.gender,
-                      "ranking": self.ranking,
-                      "identity": self.identity,
-                      "tournament_point": self.tournament_point}
-        return serialized
+    def serialization(self):
+        self.serialized = {"lastname": self.lastname,
+                           "firstname": self.firstname,
+                           "date_of_birth": self.date_of_birth,
+                           "gender": self.gender,
+                           "ranking": self.ranking,
+                           "identity": self.identity,
+                           "tournament_point": self.tournament_point}
 
 
 if __name__ == "__main__":

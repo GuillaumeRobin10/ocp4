@@ -3,7 +3,7 @@
 
 class Tournament:
     def __init__(self, identity="1", name="", place="", starting_date="", ending_date="", kind="", description="",
-                 number_of_round=4, players_id=None):
+                 number_of_round=4):
         self.identity = identity
         self.name = name
         self.place = place
@@ -12,10 +12,11 @@ class Tournament:
         self.kind = kind
         self.description = description
         self.number_of_round = number_of_round
-        self.players_id = players_id
         self.rounds = []
         self.players_id_sorted = []
+        self.serialized_round = []
         self.serialized_tournament = {}
+        self.players_id = []
 
     def edit_id(self, identity):
         self.identity = identity
@@ -41,7 +42,7 @@ class Tournament:
     def edit_description(self, description):
         self.description = description
 
-    def edit_players_id(self, player_id):
+    def edit_players_id_by_one(self, player_id):
         self.players_id.append(player_id)
 
     def add_a_round(self, a_round):
@@ -49,6 +50,12 @@ class Tournament:
 
     def edit_players_id_sorted(self, player_id):
         self.players_id_sorted.append(player_id)
+
+    def edit_serialized_round(self, new_serialized_roud):
+        self.serialized_round.append(new_serialized_roud)
+
+    def del_serialized_round(self):
+        self.serialized_round = []
 
     def serialization(self):
         self.serialized_tournament = {"identity": self.identity,
@@ -59,6 +66,7 @@ class Tournament:
                                       "kind": self.kind,
                                       "description": self.description,
                                       "number_of_round": self.number_of_round,
+                                      "serialized_round": self.serialized_round,
                                       "players_id": self.players_id}
 
 
