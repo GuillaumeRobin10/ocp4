@@ -32,10 +32,10 @@ MOD_PLAYER = {"string": "Modifier le classement (1)\nretour (2)",
               "cases": CASES12,
               "Header": "Menu editions"}
 RAPPORT_MENU_STRING = {"string": "Liste de tous les acteurs (1)\n"
-                                 "Liste de tous les joueurs d'un tournoi (2)\n"
+                                 "Liste de tous les joueurs du tournoi (2)\n"
                                  "Liste de tous les tournois (3)\n"
-                                 "Liste de tous les tours d'un tournoi. (4)\n"
-                                 "Liste de tous les matchs d'un tournoi (5)\n"
+                                 "Liste de tous les tours du tournoi. (4)\n"
+                                 "Liste de tous les matchs du tournoi (5)\n"
                                  "Retour (6)\n"
                                  "Quitter (9)",
                        "cases": CASES123569,

@@ -22,7 +22,7 @@ def tournament_menu():
         make_a_tournament(display_make_a_tournament())
     elif u_choice == "2":
         u_choice2 = choice_menu(tournament_loaded["string"], tournament_loaded["cases"], "Chargement de Tournois")
-        make_a_tournament(loading_tournament(u_choice2))
+        make_a_tournament(loading_tournament(u_choice2), False)
     elif u_choice == u_choice == T_MENU_STRING["cases"][-1]:
         pass
 

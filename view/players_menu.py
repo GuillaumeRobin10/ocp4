@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from controller.loading import scooting_player, loading_player
-from controller.building import make_a_player, edit_ranking
+from controller.building import make_a_player
 from controller.Display import display
+from controller.saving import edit_ranking
 
 from view.display_instance_making import display_make_a_player
 from view.tools import choice_menu, display_head_menu
