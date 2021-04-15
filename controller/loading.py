@@ -55,7 +55,8 @@ def loading_tournament(identity):
             "kind": tournament_to_load["kind"],
             "description": tournament_to_load["description"],
             "number_of_round": tournament_to_load["number_of_round"],
-            "players_id": tournament_to_load["players_id"]}
+            "players_id": tournament_to_load["players_id"],
+            "serialized_round": tournament_to_load["serialized_round"]}
 
 
 def loading_player(identity):

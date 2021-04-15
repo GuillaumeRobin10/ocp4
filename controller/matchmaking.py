@@ -16,9 +16,8 @@ def other_matchmaking(players_sorted_list):
             try_match_1 = (players_sorted_list[0], players_sorted_list[i])
             try_match_2 = (players_sorted_list[i], players_sorted_list[0])
             if (try_match_1 not in match_done) and (try_match_2 not in match_done):
-                print(try_match_1)
-                matches.append((players_sorted_list.pop(i), players_sorted_list.pop(0)))
+                matches.append(([players_sorted_list.pop(i), 0], [players_sorted_list.pop(0), 0]))
                 make = True
             i += 1
-        matches.append((players_sorted_list.pop(0), players_sorted_list.pop(0)))
+        matches.append(([players_sorted_list.pop(0), 0], [players_sorted_list.pop(0), 0]))
     return matches
