@@ -4,6 +4,10 @@ from controller.setting import current_tournament
 
 
 def other_matchmaking(players_sorted_list):
+    """
+    :param players_sorted_list: list of player sorted by ranking and tournamenent points
+    :return: list of matches
+    """
     matches = []
     match_done = []
     for rounded in current_tournament.rounds:

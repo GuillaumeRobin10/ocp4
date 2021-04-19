@@ -5,6 +5,10 @@ from datetime import date
 
 
 def control_int():
+    """
+    check if the value is an interger
+    :return: none
+    """
     its_ok = False
     system("stty -echo")
     while not its_ok:
@@ -18,6 +22,10 @@ def control_int():
 
 
 def control_choice(cases):
+    """
+    :param cases: choice that the user have
+    :return: the choice
+    """
     system("stty -echo")
     user = input().lower()
     while user not in cases:
@@ -71,6 +79,10 @@ def control_date(date1=""):
 
 
 def control_natural():
+    """
+
+    :return: a natural
+    """
     natural = -1
     while natural < 0:
         natural = control_int()
@@ -78,6 +90,10 @@ def control_natural():
 
 
 def control_gender():
+    """
+    check if the string is a Homme or Femme
+    :return: a string
+    """
     gender = ""
     system("stty -echo")
     while not (gender == "homme" or gender == "femme"):

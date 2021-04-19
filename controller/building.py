@@ -2,12 +2,17 @@
 # -*- coding: utf-8 -*-
 from model.player import Player
 from model.round import Round
-from controller.loading import get_identity, scooting_player_id, loading_player
+from model.loading import get_identity, scooting_player_id, loading_player
 from controller.setting import current_tournament, players
-from controller.saving import saving_player
+from model.saving import saving_player
 
 
 def make_a_tournament(tournament_dict, new=True):
+    """
+    :param tournament_dict: dictionary with your tournament caract
+    :param new: True if it's a new tournament, else false
+    :return: tournament instance
+    """
     current_tournament.edit_name(tournament_dict['name'])
     current_tournament.edit_place(tournament_dict['place'])
     current_tournament.edit_starting_date(tournament_dict['starting_date'])
@@ -31,6 +36,11 @@ def make_a_tournament(tournament_dict, new=True):
 
 
 def make_a_round(ronde_dict, tournament_id):
+    """
+    :param ronde_dict: dictionary, with your round caract
+    :param tournament_id: interger, identity of your tournament
+    :return: round instance
+    """
 
     rond = Round(tournament_id=tournament_id, name=ronde_dict["name"],
                  starting_date=ronde_dict["starting_date"], ending_date=ronde_dict["ending_date"])
@@ -39,6 +49,12 @@ def make_a_round(ronde_dict, tournament_id):
 
 
 def make_a_player(player_dict, new=True, tournament_id=0):
+    """
+    :param player_dict: ictionary, with your player caract
+    :param new: true if it's a new player, else False
+    :param tournament_id: interger, identity of your tournament
+    :return: player instance
+    """
     if len(players) < 8:
         current_player = Player()
         current_player.edit_lastname(player_dict["lastname"])
