@@ -8,8 +8,8 @@ Cette application peut être installée en suivant les étapes décrites ci-dess
 
 ### Installation et exécution de l'application
 
-1.  Cloner ce dépôt de code à l'aide de la commande  `$ git clone clone https://github.com/GuillaumeRobin10/ocp4.git`
-2.  Rendez-vous depuis un terminal à la racine du répertoire ocmovies-api-fr avec la commande  `$ cd ChessTournament`
+1.  Cloner ce dépôt de code à l'aide de la commande  `$ git clone https://github.com/GuillaumeRobin10/ocp4.git`
+2.  Rendez-vous depuis un terminal à la racine du répertoire ... avec la commande  `$ cd ChessTournament`
 3.  Créer un environnement virtuel pour le projet avec  `$ python -m venv env`  sous Windows ou  `$ python3 -m venv env`  sous MacOS ou Linux.
 4.  Activez l'environnement virtuel avec  `$ env\Scripts\activate`  sous Windows ou  `$ source env/bin/activate`  sous MacOS ou Linux.
 5.  Installez les dépendances du projet avec la commande  `$ pip install -r requirements.txt`
