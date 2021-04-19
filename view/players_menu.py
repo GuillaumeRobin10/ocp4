@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from controller.loading import scooting_player, loading_player
+from model.loading import scooting_player, loading_player
 from controller.building import make_a_player
 from controller.Display import display
-from controller.saving import edit_ranking
+from model.saving import edit_ranking
 
 from view.display_instance_making import display_make_a_player
 from view.tools import choice_menu, display_head_menu
@@ -12,6 +12,10 @@ from view.setting import PLAYER_0_LOADED_MENU_STRING
 
 
 def players_menu():
+    """
+    Display player's menu
+    :return: none
+    """
     players_loaded = scooting_player()
     if players_loaded == 0:
         u_choice = choice_menu(PLAYER_0_LOADED_MENU_STRING["string"],
@@ -40,6 +44,11 @@ def players_menu():
 
 
 def player_menu_2():
+    """
+    Display edition menu
+    allow edit player ronk
+    :return: none
+    """
     u_choice2 = choice_menu(MOD_PLAYER["string"], MOD_PLAYER["cases"], "Chargement de Joueur")
     if u_choice2 == "1":
         players_loaded = scooting_player()

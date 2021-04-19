@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from controller.loading import scooting_tournament, loading_tournament
+from model.loading import scooting_tournament, loading_tournament
 from controller.building import make_a_tournament
 
 from view.tools import choice_menu
@@ -9,6 +9,10 @@ from view.display_instance_making import display_make_a_tournament
 
 
 def tournament_menu():
+    """
+    Display tournament menu
+    :return: none
+    """
     tournament_loaded = scooting_tournament()
     if tournament_loaded == 0:
         u_choice = choice_menu(TOURNAMENT_0_LOADED_MENU_STRING["string"],

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from controller.loading import get_db
+from model.loading import get_db
 from controller.rapport import sort_players_alpha, sort_players_ranking
 from controller.rounding import sort_name, sort_players
 from controller.setting import current_tournament, players
@@ -10,6 +10,10 @@ from view.setting import RAPPORT_MENU_STRING, RAPPORT_ACTOR, RAPPORT_ACTOR_IN
 
 
 def a_sort_by__alpha():
+    """
+    display all player sorted by alpha
+    :return:
+    """
     i = 1
     for player in sort_players_alpha(get_db("players")):
         print(f"{i}. {player[0]} {player[1]}")
@@ -17,13 +21,24 @@ def a_sort_by__alpha():
 
 
 def a_sort_by_ranking():
+    """
+    display all player sorted by ranking point
+    :return: none
+    """
     i = 1
-    for player in sort_players_ranking(get_db("players")):
-        print(f"{i}. {player[0]} {player[1]} {player[2]} points")
-        i += 1
+    try:
+        for player in sort_players_ranking(get_db("players")):
+            print(f"{i}. {player[0]} {player[1]} {player[2]} points")
+            i += 1
+    except KeyError:
+        pass
 
 
 def a_sort_by_alpha_in_tournament():
+    """
+    display player sorted by alpha
+    :return: none
+    """
     i = 1
     for player in sort_name():
         print(f"{i}. {player.lastname} {player.firstname}")
@@ -31,18 +46,36 @@ def a_sort_by_alpha_in_tournament():
 
 
 def a_sort_by_ranking_in_tournament():
+    """
+    display player sorted by ranking
+    :return: none
+    """
     i = 1
     string = ""
     for player in sort_players():
-        string +=\
-            f"{i}. {player.lastname} {player.firstname} {player.tournament_point[current_tournament.identity]} points\n"
+        try:
+            string +=\
+                f"{i}. {player.lastname}" \
+                f" {player.firstname}" \
+                f" {player.tournament_point[current_tournament.identity]}" \
+                f" points\n"
+        except KeyError:
+            string +=\
+                f"{i}. {player.lastname}" \
+                f" {player.firstname}" \
+                f" \n"
+
         i += 1
     string += "\n tapez sur (1) pour continuez"
-    choice_menu(string, ["1"], "Classement final")
+    choice_menu(string, ["1"], "Classement")
     return 1
 
 
 def rapport_menu():
+    """
+    display the rapport menu
+    :return: none
+    """
     u_choice = choice_menu(RAPPORT_MENU_STRING["string"], RAPPORT_MENU_STRING["cases"], RAPPORT_MENU_STRING["Header"])
     if u_choice == "1":
         u_choice = choice_menu(RAPPORT_ACTOR["string"], RAPPORT_ACTOR["cases"], RAPPORT_ACTOR["Header"])

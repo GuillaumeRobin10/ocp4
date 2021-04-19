@@ -4,7 +4,7 @@ from controller.rounding import pairing, scoring
 from controller.setting import current_tournament, result_list, players
 from controller.Display import display
 from controller.getDate import what_date_is_it
-from controller.saving import saving_tournament, saving_players
+from model.saving import saving_tournament, saving_players
 
 from view.tools import choice_menu, display_head_menu
 from view.setting import IN_ROUND_MENU, END_ROUND_MENU
@@ -13,6 +13,10 @@ from view.players_menu import player_menu_2
 
 
 def display_rounding():
+    """
+    Display the round interface
+    :return: none
+    """
     display_head_menu(current_tournament.rounds[-1].name)
     i = 0
     joueur1 = ""
@@ -36,6 +40,11 @@ def display_rounding():
 
 
 def in_round_menu():
+    """
+    Main menu.
+    Menu with the different choce you have.
+    :return: none
+    """
     if len(current_tournament.rounds) < current_tournament.number_of_round:
         u_choice = choice_menu(IN_ROUND_MENU["string"], IN_ROUND_MENU["cases"], IN_ROUND_MENU["Header"])
         if u_choice == "1":
