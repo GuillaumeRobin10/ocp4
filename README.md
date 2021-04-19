@@ -1,7 +1,7 @@
 # ChessTournament
-projet 4 openclassroom
+Projet 4 openclassroom
 
-Le projet ChessTournament, est une application terminal a exécuter localement réaliser dans le cadre d'une formation.Elle permet de gérer des tournois d'échecs.Elle permets de  sauvegarder des tournois et des joueurs dans la base de données associé.Elle permet également de charger des données se trouvant dans la base de données. Cette application génère les rondes sous un format suisse.
+Le projet ChessTournament, est une application terminal à exécuter localement réalisée dans le cadre d'une formation. Elle permet de gérer des tournois d'échecs. Elle permet de sauvegarder des tournois et des joueurs dans la base de données associée. Elle permet également de charger des données se trouvant dans la base de données. Cette application génère les rondes sous un format suisse.
 
 Cette application peut être installée en suivant les étapes décrites ci-dessous. 
 
@@ -17,6 +17,6 @@ Cette application peut être installée en suivant les étapes décrites ci-dess
 
 ## Utilisation et documentation
 
-Dans cette application vous ne pouvez pas voir vos entrez clavier tant qu'elle n'ont pas été validée par l'application.
+Dans cette application vous ne pouvez pas voir vos entrées clavier tant qu'elles n'ont pas été validées par l'application.
 La sauvegarde des joueurs et des tournois est automatique à la fin de chaque ronde.
-la sauvegarde d'un joueur est automatique si vous changer sont classement.
+La sauvegarde d'un joueur est automatique si vous change son classement.
