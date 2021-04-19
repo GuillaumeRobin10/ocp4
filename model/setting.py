@@ -5,8 +5,6 @@ from tinydb import TinyDB
 
 try:
     mkdir("data")
-    with open("databases.json", "w"):
-        pass
 except FileExistsError:
     pass
 db = TinyDB("data/databases.json")
