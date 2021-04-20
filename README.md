@@ -20,3 +20,10 @@ Cette application peut être installée en suivant les étapes décrites ci-dess
 Dans cette application vous ne pouvez pas voir vos entrées clavier tant qu'elles n'ont pas été validées par l'application.
 La sauvegarde des joueurs et des tournois est automatique à la fin de chaque ronde.
 La sauvegarde d'un joueur est automatique si vous change son classement.
+
+## Flake8
+
+Afin de pouvez générer un rapport flake8 html vous devez suivre les instructions suivantes:
+1. Ouvrez un terminal dans le dossier ocp4.
+2. Activez l'environnement virtuel avec  `$ env\Scripts\activate`  sous Windows ou  `$ source env/bin/activate`  sous MacOS ou Linux.
+3. Lancer le rapport du projet avec la commande  `$ flake8 --format=html --htmldir=flake-report --exclude env --max-line-length 11
