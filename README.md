@@ -26,4 +26,4 @@ La sauvegarde d'un joueur est automatique si vous change son classement.
 Afin de pouvez générer un rapport flake8 html vous devez suivre les instructions suivantes:
 1. Ouvrez un terminal dans le dossier ocp4.
 2. Activez l'environnement virtuel avec  `$ env\Scripts\activate`  sous Windows ou  `$ source env/bin/activate`  sous MacOS ou Linux.
-3. Lancer le rapport du projet avec la commande  `$ flake8 --format=html --htmldir=flake-report --exclude env --max-line-length 11
+3. Lancer le rapport du projet avec la commande  `flake8 --format=html --htmldir=flake-report --exclude env --max-line-length 11
